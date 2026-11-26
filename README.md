@@ -1,5 +1,7 @@
 # Smart Asset Protection and Hidden Tracking System 🛡️📍
 
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Open_Web_App-00C853?style=for-the-badge&logo=googlechrome&logoColor=white)](https://shivani-pabba.github.io/Smart-Asset-Protection-and-Hidden-Tracking-System/)
+
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart&logoColor=white)](https://dart.dev)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org)
