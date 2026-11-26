@@ -19,6 +19,7 @@
 | **GANGILI SATHVIKA** | **2303A510F9** |
 | **A. RAMYA SRI** | **2303A51286** |
 | **SHAIK AFROZ** | **2303A51983** |
+| **SRIHITHA** | **2303A510--** |
 
 <br>
 
@@ -48,6 +49,7 @@ This is to certify that the Capstone Project report entitled **“SMART ASSET PR
 - **GANGILI SATHVIKA** (Reg. No: **2303A510F9**)
 - **A. RAMYA SRI** (Reg. No: **2303A51286**)
 - **SHAIK AFROZ** (Reg. No: **2303A51983**)
+- **SRIHITHA** (Reg. No: **2303A510--**)
 
 in partial fulfillment of the requirements for the award of the degree of **Bachelor of Technology in Computer Science and Engineering** from the **School of Computer Science and Artificial Intelligence, SR University, Warangal**, during the academic year **2026–2027**. 
 
@@ -91,6 +93,7 @@ We further declare that the content of this project report, in full or in part, 
 2. _____________________________ &nbsp;&nbsp;&nbsp;&nbsp; **GANGILI SATHVIKA** (2303A510F9)
 3. _____________________________ &nbsp;&nbsp;&nbsp;&nbsp; **A. RAMYA SRI** (2303A51286)
 4. _____________________________ &nbsp;&nbsp;&nbsp;&nbsp; **SHAIK AFROZ** (2303A51983)
+5. _____________________________ &nbsp;&nbsp;&nbsp;&nbsp; **SRIHITHA** (2303A510--)
 
 <br><br>
 <div style="page-break-after: always;"></div>

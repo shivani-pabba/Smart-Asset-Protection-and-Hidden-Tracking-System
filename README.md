@@ -212,10 +212,11 @@ flutter run
 ## 👥 9. Team Members & Acknowledgements
 
 ### Project Team (B.Tech Computer Science & AI)
-- **PABBA SHIVANI** (Roll No: `2303A510I4`) — *Team Lead, Mobile & Cloud Integration*
-- **GANGILI SATHVIKA** (Roll No: `2303A510F9`) — *Frontend & Geofencing Systems*
-- **A. RAMYA SRI** (Roll No: `2303A51286`) — *Backend REST APIs & Database Design*
-- **SHAIK AFROZ** (Roll No: `2303A51983`) — *BLE Hardware & Protocol Verification*
+- **PABBA SHIVANI** (Roll No: `2303A510I4`) — *Project Lead, Full-Stack Mobile & Backend Architecture (Core Development)*
+- **GANGILI SATHVIKA** (Roll No: `2303A510F9`) — *Team Member, UI Testing & Geofencing Research*
+- **A. RAMYA SRI** (Roll No: `2303A51286`) — *Team Member, REST API & Database Modeling Verification*
+- **SHAIK AFROZ** (Roll No: `2303A51983`) — *Team Member, BLE Hardware Proximity Evaluation*
+- **SRIHITHA** — *Team Member, Quality Assurance & Technical Documentation*
 
 ### Faculty Mentorship & Institutional Support
 - **Project Guide:** **Mr. L. Gunakar Rao**, Assistant Professor, Department of Computer Science and Artificial Intelligence.
