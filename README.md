@@ -216,7 +216,7 @@ flutter run
 - **GANGILI SATHVIKA** (Roll No: `2303A510F9`) — *Team Member, UI Testing & Geofencing Research*
 - **A. RAMYA SRI** (Roll No: `2303A510I9`) — *Team Member, REST API & Database Modeling Verification*
 - **G. Pranathi** (Roll No: `2303A51609`) — *Team Member, BLE Hardware Proximity Evaluation*
-- **SRIHITHA** (Roll No: `2303A51260`) — *Team Member, Quality Assurance & Technical Documentation*
+- **T. SRIHITHA** (Roll No: `2303A51260`) — *Team Member, Quality Assurance & Technical Documentation*
 
 ### Faculty Mentorship & Institutional Support
 - **Project Guide:** **Mr. L. Gunakar Rao**, Assistant Professor, Department of Computer Science and Artificial Intelligence.
