@@ -51,7 +51,7 @@ class _SmartAssetAppState extends State<SmartAssetApp> {
     setState(() {
       isDarkMode = prefs.getBool('isDarkMode') ?? false;
       customApiBase = prefs.getString('apiBaseUrl') ?? 'http://127.0.0.1:5000';
-      isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+      isLoggedIn = kIsWeb ? false : (prefs.getBool('isLoggedIn') ?? false);
       currentUserName = prefs.getString('currentUserName') ?? 'Shivani Pabba';
       currentUserEmail = prefs.getString('currentUserEmail') ?? 'shivani@sruniversity.ac.in';
     });
