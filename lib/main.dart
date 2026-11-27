@@ -600,7 +600,6 @@ class _HomePageState extends State<HomePage> {
   bool isGettingLocation = false;
   String locationMessage = 'Location not fetched yet.';
   String placeName = 'Place name not available';
-  final Geocoding geocoding = Geocoding();
   final MapController mapController = MapController();
   final List<Map<String, dynamic>> locationHistory = [];
 
@@ -1146,7 +1145,7 @@ class _HomePageState extends State<HomePage> {
   Future<String> getPlaceName(double latitude, double longitude) async {
     if (kIsWeb) return 'SR University Campus, Warangal';
     try {
-      final placemarks = await geocoding.placemarkFromCoordinates(latitude, longitude);
+      final placemarks = await Geocoding().placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isEmpty) return 'Place name not available';
       final place = placemarks.first;
       final parts = <String>[
