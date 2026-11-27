@@ -18,6 +18,15 @@
 
   <title>Smart Asset Protection</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (var registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
