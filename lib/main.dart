@@ -726,6 +726,66 @@ class _HomePageState extends State<HomePage> {
               return entry;
             }).toList();
 
+      if (kIsWeb && decodedAssets.isEmpty) {
+        decodedAssets.addAll([
+          {
+            '_id': 'demo_asset_1',
+            'name': 'Gold Ring',
+            'category': 'Jewellery',
+            'safeName': 'Home Safe Zone',
+            'latitude': 18.086033,
+            'longitude': 79.599920,
+            'radius': 50,
+            'trackerId': 'DC:8D:95:0A:E6:FF',
+            'trackerName': 'Amazon Basics Aero Tag',
+            'trackerStatus': 'connected',
+            'lastRssi': -65,
+            'movementLatitude': 18.086033,
+            'movementLongitude': 79.599920,
+            'isOutside': false,
+          },
+          {
+            '_id': 'demo_asset_2',
+            'name': 'College Bag & Laptop',
+            'category': 'Bags & Luggage',
+            'safeName': 'SR University Campus',
+            'latitude': 18.086033,
+            'longitude': 79.599920,
+            'radius': 100,
+            'trackerId': null,
+            'trackerName': null,
+            'trackerStatus': 'unpaired',
+            'lastRssi': null,
+            'movementLatitude': 18.086033,
+            'movementLongitude': 79.599920,
+            'isOutside': false,
+          },
+        ]);
+      }
+
+      if (kIsWeb && decodedAlerts.isEmpty) {
+        decodedAlerts.addAll([
+          {
+            'title': 'System Active',
+            'assetName': 'System',
+            'description': 'Smart Asset Protection Web Evaluation Mode activated.',
+            'alertType': 'system',
+            'severity': 'info',
+            'isRead': false,
+            'timestamp': DateTime.now().toIso8601String(),
+          },
+          {
+            'title': 'BLE Tracker Linked',
+            'assetName': 'Gold Ring',
+            'description': 'Aero Tag proximity signal verified (-65 dBm).',
+            'alertType': 'tracker_connected',
+            'severity': 'info',
+            'isRead': false,
+            'timestamp': DateTime.now().subtract(const Duration(minutes: 5)).toIso8601String(),
+          },
+        ]);
+      }
+
       if (!mounted) return;
       setState(() {
         assets
@@ -769,6 +829,7 @@ class _HomePageState extends State<HomePage> {
   // -------------------------------------------------------------
 
   Future<void> _fetchAssetsFromServer() async {
+    if (kIsWeb && !effectiveApiBase.startsWith('https://')) return;
     try {
       final response = await http
           .get(Uri.parse(assetsApiUrl))
@@ -871,6 +932,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _fetchAlertsFromServer() async {
+    if (kIsWeb && !effectiveApiBase.startsWith('https://')) return;
     try {
       final response = await http
           .get(Uri.parse(alertsApiUrl))
@@ -893,6 +955,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _fetchHistoryFromServer() async {
+    if (kIsWeb && !effectiveApiBase.startsWith('https://')) return;
     try {
       final response = await http
           .get(Uri.parse(historyApiUrl))
@@ -994,6 +1057,31 @@ class _HomePageState extends State<HomePage> {
   // -------------------------------------------------------------
 
   Future<Position> fetchLocation() async {
+    if (kIsWeb) {
+      try {
+        LocationPermission permission = await Geolocator.checkPermission();
+        if (permission == LocationPermission.denied) {
+          permission = await Geolocator.requestPermission();
+        }
+        return await Geolocator.getCurrentPosition(
+          locationSettings: const LocationSettings(accuracy: LocationAccuracy.medium),
+        ).timeout(const Duration(seconds: 4));
+      } catch (_) {
+        return Position(
+          latitude: 18.086033,
+          longitude: 79.599920,
+          timestamp: DateTime.now(),
+          accuracy: 10.0,
+          altitude: 0.0,
+          altitudeAccuracy: 0.0,
+          heading: 0.0,
+          headingAccuracy: 0.0,
+          speed: 0.0,
+          speedAccuracy: 0.0,
+        );
+      }
+    }
+
     // 1. Verify device location service is enabled
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -1056,6 +1144,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<String> getPlaceName(double latitude, double longitude) async {
+    if (kIsWeb) return 'SR University Campus, Warangal';
     try {
       final placemarks = await geocoding.placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isEmpty) return 'Place name not available';
@@ -1232,26 +1321,30 @@ class _HomePageState extends State<HomePage> {
   // -------------------------------------------------------------
 
   void _setupBleAdapterMonitoring() {
-    FlutterBluePlus.adapterState.listen((state) {
-      if (state == BluetoothAdapterState.off && mounted) {
-        setState(() {
-          bluetoothMessage = 'Bluetooth is OFF. Please enable Bluetooth on your phone.';
-          trackerConnected = false;
-          connectedBleDevice = null;
-        });
-      }
-    });
+    if (kIsWeb) return;
+    try {
+      FlutterBluePlus.adapterState.listen((state) {
+        if (state == BluetoothAdapterState.off && mounted) {
+          setState(() {
+            bluetoothMessage = 'Bluetooth is OFF. Please enable Bluetooth on your phone.';
+            trackerConnected = false;
+            connectedBleDevice = null;
+          });
+        }
+      });
 
-    _scanSubscription = FlutterBluePlus.scanResults.listen((results) {
-      if (mounted) {
-        setState(() {
-          discoveredDevices = results;
-        });
-      }
-    });
+      _scanSubscription = FlutterBluePlus.scanResults.listen((results) {
+        if (mounted) {
+          setState(() {
+            discoveredDevices = results;
+          });
+        }
+      });
+    } catch (_) {}
   }
 
   Future<bool> _requestBluetoothPermissions() async {
+    if (kIsWeb) return true;
     try {
       final scanStatus = await Permission.bluetoothScan.request();
       final connectStatus = await Permission.bluetoothConnect.request();
@@ -1278,6 +1371,12 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _startBleScan() async {
     if (isBleScanning) return;
+    if (kIsWeb) {
+      setState(() {
+        bluetoothMessage = 'BLE hardware scan requires an Android phone. Use Simulation Mode on Web.';
+      });
+      return;
+    }
 
     final granted = await _requestBluetoothPermissions();
     if (!granted) return;
