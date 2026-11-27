@@ -2236,7 +2236,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          ?trailing,
+          if (trailing != null) trailing,
         ],
       ),
     );
